@@ -6,13 +6,17 @@
   "scripts": {
     "html-minify": "node html-minify.js",
     "copy-assets": "node copy-assets.js",
+    "bundle-dev": "microbundle --output public --target browser --format cjs",
+    "bundle-dev:watch": "microbundle watch --output public --target browser --format cjs",
     "bundle": "microbundle --output public --target browser --format cjs --no-sourcemap",
     "bundle:watch": "microbundle watch --output public --target browser --format cjs --sourcemap false",
     "bundle:sw": "node sw-build.js",
     "build": "rm -rf public; npm run bundle; npm run copy-assets; npm run bundle:sw; npm run html-minify",
     "deploy": "npm run build; firebase deploy --project hnpwa-vanilla",
     "serve": "serve ./public --listen 8080 --single",
-    "dev": "(npm run copy-assets & npm run bundle:sw & npm run bundle:watch & npm run serve)"
+    "dev": "(npm run copy-assets & npm run bundle:sw & npm run bundle:watch & npm run serve)",
+    "build-dev": "rm -rf public; npm run copy-assets; npm run bundle-dev; npm run bundle:sw",
+    "dev-no-watch": "npm run build-dev; npm run serve"
   },
   "keywords": [],
   "author": "Cristian Bote",
